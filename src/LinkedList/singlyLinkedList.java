@@ -1,4 +1,4 @@
-package SinglyLinkedList;
+package LinkedList;
 
 public class singlyLinkedList {
 	private linkedList head;                           //Head pointer of LinkedList
@@ -15,6 +15,16 @@ public class singlyLinkedList {
 	
 	public void displayLinkedList() {                  // for displaying Linkedlist data
 		linkedList current = head;
+		while(current != null) {
+			System.out.print(current.data+" --> ");
+			current = current.next;
+		}
+		System.out.print("Null");
+		System.out.println("\n");
+	}
+	
+	public void displayLinkedList(linkedList head1) {                  // for displaying Linkedlist data by passing head parameter
+		linkedList current = head1;
 		while(current != null) {
 			System.out.print(current.data+" --> ");
 			current = current.next;
@@ -115,7 +125,6 @@ public class singlyLinkedList {
 		}
 	}
 	
-	
 	public boolean searchnode(int data) {                // searching an element in linkedlist
 		linkedList current  = head;
 		while(current != null) {
@@ -151,7 +160,7 @@ public class singlyLinkedList {
 		return slow;
 	}
 	
-	
+
 	//for sorted linked list
 	public linkedList nth_node_from_endlist(int n) {    // Nth node from the end of linkedlist
 		linkedList mainptr = head;
@@ -179,7 +188,7 @@ public class singlyLinkedList {
 		}
 	}
 	
-	public void insertIntoSortedList(int data) {
+	public void insertIntoSortedList(int data) {        // Insert data into sorted singly linkedlist
 		linkedList node = new linkedList(data);
 		linkedList current =head;
 		linkedList previous = null;
@@ -191,7 +200,118 @@ public class singlyLinkedList {
 		previous.next = node;
 	}
 	
+    public int RemoveKey(int data) {                    // Remove data into sorted singly linkedlist
+    	linkedList current = head;
+    	linkedList previous = null;
+    	while(current.data != data && current!=null) {
+    		previous = current;
+    		current = current.next;
+    	}
+    	if(current!= null) {
+    		previous.next= current.next;
+    		current.next = null;
+    	}
+    	return current.data;
+    }
 	
+    public boolean detectLoop(){                        //Detect Loop in singly LInkedlist
+    	linkedList slowptr = head;
+    	linkedList fastptr = head;
+    	while(fastptr!=null && fastptr.next!=null) {
+    		slowptr = slowptr.next;
+    		fastptr = fastptr.next.next;
+    		if(slowptr==fastptr) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
+    
+    public linkedList StartingnodeOFLoop() {            // Finding A starting node of linkedlist
+    	linkedList slowptr = head;
+    	linkedList fastptr = head;
+    	boolean bool = false;
+    	while(fastptr!=null && fastptr.next!=null) {
+    		slowptr = slowptr.next;
+    		fastptr = fastptr.next.next;
+    		if(slowptr==fastptr) {
+    			bool= true;
+    			break;
+    		}
+    	}
+    	fastptr = head;
+    	if(bool) {
+    		while(fastptr != slowptr) {
+    			fastptr = fastptr.next;
+    			slowptr = slowptr.next;
+    		}
+    		return slowptr;
+    	}
+    	return null;
+    }
+
+    public void RemoveLoop() {                    //Removing Loop from singly linkedlist
+    	linkedList slowptr = head;
+    	linkedList fastptr = head;
+    	boolean bool = false;
+    	while(fastptr!=null && fastptr.next!=null) {
+    		slowptr = slowptr.next;
+    		fastptr = fastptr.next.next;
+    		if(slowptr==fastptr) {
+    			bool= true;
+    			break;
+    		}
+    	}
+    	fastptr = head;
+    	if(bool) {
+    		while(fastptr.next != slowptr.next) {
+    			fastptr = fastptr.next;
+    			slowptr = slowptr.next;
+    		}
+    		slowptr.next = null;
+    	}
+    }
+    
+    public linkedList mergeTwoSortedList(linkedList head1,linkedList head2) {
+    	linkedList node = null;
+    	linkedList temp = null;
+    	if(head1.data >= head2.data) {
+    		node=head2;
+    		temp=head2;
+    		head2 = head2.next;
+    	}else if(head2.data>head1.data){
+    		node = head1;
+    		temp = head1;
+    		head1 = head1.next;
+    	}
+    	
+    	while(head1!=null && head2!=null) {
+    		if(head1.data < head2.data) {
+    			temp.next=head1;
+    			temp = head1;
+    			head1 = head1.next;
+    		}else if(head2.data < head1.data) {
+    			temp.next=head2;
+    			temp = head2;
+    			head2 = head2.next;
+    		}else {
+    			temp.next=head1;
+    			temp=head1;
+    			head1 = head1.next;
+    			temp.next=head2;
+    			temp=head2;
+    			head2 = head2.next;
+    		}
+    	}
+    	
+    	if(head1 == null) {
+    		temp.next = head2;
+    	}else {
+    		temp.next = head1;
+    	}
+    	return node;
+    }
+    
 	public static void main(String[] args) {
 //		singlyLinkedList s1 = new singlyLinkedList();
 //		
@@ -241,19 +361,69 @@ public class singlyLinkedList {
 //		System.out.println(s1.middlenode().data);
 //		System.out.println(s1.nth_node_from_endlist(2).data);
 		
-		singlyLinkedList s2 = new singlyLinkedList();
-		s2.head = new linkedList(2);
-		s2.insertAtEnd(2);
-		s2.insertAtEnd(5);
-		s2.insertAtEnd(6);
-		s2.insertAtEnd(6);
-		s2.insertAtEnd(9);
-		s2.insertAtEnd(9);
 		
-		s2.displayLinkedList();
+		// Sorted list
+//		singlyLinkedList s2 = new singlyLinkedList();
+//		s2.head = new linkedList(2);
+//		linkedList second = new linkedList(5);
+//		linkedList third = new linkedList(6);
+//		linkedList fourth = new linkedList(6);
+//		linkedList fifth = new linkedList(9);
+//		linkedList sixth = new linkedList(9);
+//		
+//		s2.head.next = second;
+//		second.next = third;
+//		third.next = fourth;
+//		fourth.next = fifth;
+//		fifth.next = sixth;
+//		sixth.next=third;
+//		
+//		s2.displayLinkedList();
 //		s2.Duplicate_node();
 //		s2.displayLinkedList();
-		s2.insertIntoSortedList(7);
-		s2.displayLinkedList();
+//		s2.insertIntoSortedList(7);
+//		s2.displayLinkedList();
+//		System.out.println(s2.RemoveKey(6));
+//		s2.displayLinkedList();
+//		System.out.println(s2.detectLoop());
+//		linkedList node =s2.StartingnodeOFLoop();
+//		System.out.println(node.data);
+//		s2.RemoveLoop();
+//		System.out.println(s2.detectLoop());
+//		s2.displayLinkedList();
+		
+		
+		//merging A linked list
+		singlyLinkedList s3 = new singlyLinkedList();
+		s3.head = new linkedList(2);
+		linkedList second = new linkedList(5);
+		linkedList third = new linkedList(6);
+		linkedList fourth = new linkedList(8);
+		linkedList fifth = new linkedList(11);
+		linkedList sixth = new linkedList(12);
+		s3.head.next = second;
+		second.next = third;
+		third.next = fourth;
+		fourth.next = fifth;
+		fifth.next = sixth;
+		s3.displayLinkedList();
+		
+		
+		singlyLinkedList s4 = new singlyLinkedList();
+		s4.head = new linkedList(2);
+		linkedList seco = new linkedList(3);
+		linkedList thi = new linkedList(4);
+		linkedList fou = new linkedList(8);
+		linkedList fif = new linkedList(9);
+		linkedList six = new linkedList(13);
+		s4.head.next = seco;
+		seco.next = thi;
+		thi.next = fou;
+		fou.next = fif;
+		fif.next = six;
+		s4.displayLinkedList();
+		
+		linkedList node = s3.mergeTwoSortedList(s3.head,s4.head);
+		s3.displayLinkedList(node);
 	}
 }

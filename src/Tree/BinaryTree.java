@@ -24,7 +24,7 @@ class Tree{
 		Node sec  = new Node(9);
 		Node third = new Node(1);
 		Node fourth  = new Node(5);
-		Node sixth = new Node(12);
+		Node sixth = new Node(2);
 		
 		root.left = first;
 		root.right = sec;
@@ -112,7 +112,7 @@ class Tree{
 		}
 	}
 	
-	public void levelTraversal(){
+	public void levelTraversal(){                         // Level traversal of binary tree
 		Node current = null;
 		Queue<Node> queue = new LinkedList<>();
 		queue.add(root);
@@ -127,6 +127,28 @@ class Tree{
 			}
 		}
 	}
+	
+	public int maximumValue() {                           // To call maximumvalue function having            
+		return maximumValue(root);
+	}
+	public int maximumValue(Node node){                   // To find the maximum In binary tree
+		if(node == null) {
+			return Integer.MIN_VALUE;
+		}
+		
+		int max = node.data;
+		int left = maximumValue(node.left);
+		if(left > max) {
+			max = left;
+		}
+		int right = maximumValue(node.right);
+		if(right > max) {
+			max = right;
+		}
+		
+		return max;
+	}
+	
 }
 
 
@@ -163,6 +185,9 @@ public class BinaryTree {
 		
 		System.out.print("Level order traversal:- ");
 		t1.levelTraversal();
+		System.out.println();
+		
+		System.out.println("Maximum value in binary tree: "+t1.maximumValue());
 		System.out.println();
 
 	}

@@ -23,7 +23,7 @@ public class singlyLinkedList {
 		System.out.println("\n");
 	}
 	
-	public void displayLinkedList(linkedList head1) {                  // for displaying Linkedlist data by passing head parameter
+	public void displayLinkedList(linkedList head1) {  // for displaying Linkedlist data by passing head parameter
 		linkedList current = head1;
 		while(current != null) {
 			System.out.print(current.data+" --> ");

@@ -7,7 +7,7 @@ import java.util.Stack;
 class Tree{
 	public Node root;
 	
-	private static class Node{                   //declaration of tree
+	private class Node{                   //declaration of tree
 		private int data;
 		private Node left;
 		private Node right;
@@ -128,9 +128,6 @@ class Tree{
 		}
 	}
 	
-	public int maximumValue() {                           // To call maximumvalue function having            
-		return maximumValue(root);
-	}
 	public int maximumValue(Node node){                   // To find the maximum In binary tree
 		if(node == null) {
 			return Integer.MIN_VALUE;
@@ -187,7 +184,7 @@ public class BinaryTree {
 		t1.levelTraversal();
 		System.out.println();
 		
-		System.out.println("Maximum value in binary tree: "+t1.maximumValue());
+		System.out.println("Maximum value in binary tree: "+t1.maximumValue(t1.root));
 		System.out.println();
 
 	}

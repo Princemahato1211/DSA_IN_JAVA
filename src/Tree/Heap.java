@@ -55,6 +55,29 @@ class MaxHeap{
 		swim(n);
 	}
 	
+	public void sink(){
+		int k=1;
+		while((k*2)<n) {
+			int j=k*2;
+			if(heap[j+1] > heap[j]) {
+				j++;
+			}
+			
+			if(heap[k] < heap[j]) {
+				swap(k,j);
+			}
+			k = j;
+		}
+	}
+	
+	public int deleteMax() {                    // it will delete the max value
+		int ans= heap[1];
+		swap(1,n);
+		heap[n] = 0;
+		sink();
+		n--;
+		return ans;
+	}
 	
 }
 
@@ -72,6 +95,10 @@ public class Heap {
 		
 		m1.printheap();
 		
+		System.out.println(m1.deleteMax());
+		m1.printheap();
 		
+		System.out.println(m1.deleteMax());
+		m1.printheap();
 	}
 }

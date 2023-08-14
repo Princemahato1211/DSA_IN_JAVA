@@ -9,7 +9,7 @@ public class Selection {
 		}
 		
 		selectionShorting(arr);
-		System.out.print("\nAfter  sorting : ");
+		System.out.print("\nAfter selection sorting : ");
 		for(int i=0; i<arr.length; i++) {
 			System.out.print(arr[i]+" ");
 		}

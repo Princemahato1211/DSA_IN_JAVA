@@ -9,7 +9,7 @@ public class Insertion {
 		}
 		
 		insertionShorting(arr);
-		System.out.print("\nAfter  sorting : ");
+		System.out.print("\nAfter Insertion sorting : ");
 		for(int i=0; i<arr.length; i++) {
 			System.out.print(arr[i]+" ");
 		}

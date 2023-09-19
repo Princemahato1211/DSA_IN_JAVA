@@ -60,7 +60,6 @@ class Matrix1{
 		System.out.println();
 	}
 	
-	
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(V+": Vertices "+E+": Edges\n");
